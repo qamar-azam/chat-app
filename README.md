@@ -22,7 +22,7 @@ This project is a real-time, two-way chat application built using Next.js and in
 First, install the dependencies:
 
 ```bash
-npm run install
+npm install
 ```
 
 Add publishKey and subscribeKey in .env file and run command
