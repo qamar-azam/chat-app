@@ -9,16 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "emoji-picker-react": "^4.10.0",
+    "next": "14.2.4",
+    "pubnub": "^7.6.3",
+    "pubnub-react": "^3.0.2",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@pubnub/chat": "*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
