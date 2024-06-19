@@ -11,7 +11,7 @@ type ChatFormProps = {
   handleSaveEdit: () => void;
   setText: (text: Message) => void;
   setEditText: (text: string) => void;
-  handleSend: () => void;
+  handleSend: (e: React.SyntheticEvent) => void;
 };
 
 export default function ChatForm({
