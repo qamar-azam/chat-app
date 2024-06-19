@@ -31,6 +31,8 @@ Add publishKey and subscribeKey in .env file and run command
 npm run dev
 ```
 
+Open `http://localhost:3000/?id=0` in browser and `http://localhost:3000/?id=1` in another browser window to test 1:1 chat
+
 ## Features
 
 - Create or Join Chat: Users can create a new chat or join an existing chat using a provided code.
