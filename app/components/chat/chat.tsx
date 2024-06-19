@@ -86,7 +86,7 @@ export default function ChatDialog() {
     return <p className='text-white text-2xl'>Loading...</p>;
 
   return (
-    <div className='border rounded p-4 w-1/3 text-white'>
+    <div className='border rounded p-4 sm:w-full md:w-1/2 lg:w-1/3 text-white'>
       <ChatHeader
         channelName={channel.name}
         currentUserName={chat.currentUser.name}
