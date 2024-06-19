@@ -1,12 +1,14 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { Channel, Chat, Message, User } from '@pubnub/chat';
+import { useSearchParams } from 'next/navigation';
 import ChatForm from './chatForm';
 import ChatMessages from './chatMessages';
-import randomizedUsers from './chatUsers';
+import userData from './chatUsers';
 import ChatHeader from './chatHeader';
 
 export default function ChatDialog() {
+  const searchParams = useSearchParams();
   const [chat, setChat] = useState<Chat>();
   const [text, setText] = useState('');
   const [users, setUsers] = useState<User[]>([]);
@@ -42,17 +44,17 @@ export default function ChatDialog() {
 
   useEffect(() => {
     async function initalizeChat() {
+      const id = searchParams.get('id');
+
       const chat = await Chat.init({
         publishKey: process.env.NEXT_PUBLIC_PUBNUB_PUBLISH_KEY,
         subscribeKey: process.env.NEXT_PUBLIC_PUBNUB_SUBSCRIBE_KEY,
-        userId: randomizedUsers[0].id
+        userId: userData[id || 0].id
       });
-      const currentUser = await chat.currentUser.update(
-        randomizedUsers[0].data
-      );
+      const currentUser = await chat.currentUser.update(userData[0].data);
       const interlocutor =
-        (await chat.getUser(randomizedUsers[1].id)) ||
-        (await chat.createUser(randomizedUsers[1].id, randomizedUsers[1].data));
+        (await chat.getUser(userData[id].id)) ||
+        (await chat.createUser(userData[id].id, userData[id].data));
       const { channel } = await chat.createDirectConversation({
         user: interlocutor,
         channelData: { name: 'Support Channel' }

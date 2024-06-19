@@ -13,4 +13,4 @@ const userData = [
 ];
 const randomizedUsers = Math.random() < 0.5 ? userData : userData.reverse();
 
-export default randomizedUsers;
+export default userData;
