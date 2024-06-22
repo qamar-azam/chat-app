@@ -48,6 +48,11 @@ export default function ChatForm({
         onChange={(e) =>
           editMessage ? setEditText(e.target.value) : setText(e.target.value)
         }
+        onKeyDown={(e) => {
+          if (e.key == 'Enter' && e.shiftKey == false) {
+            handleSend(e);
+          }
+        }}
         placeholder='Send message'
         className='h-10 outline-0 p-3 mr-2 w-full rounded text-sm text-black'
       />
