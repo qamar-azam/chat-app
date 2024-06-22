@@ -93,7 +93,7 @@ export default function ChatMessages({
               {message
                 .getLinkedText()
                 .map((messagePart: MixedTextTypedElement, i: number) => (
-                  <div key={String(i)} className='relative group'>
+                  <div key={message.timetoken} className='relative group'>
                     {renderMessagePart(messagePart)}
 
                     <MessageReactions
@@ -106,9 +106,10 @@ export default function ChatMessages({
                         currentUser.name === user.name ? 'right-0' : 'left-0'
                       }`}
                     >
-                      {reactionTypes.map((reaction) => (
+                      {reactionTypes.map((reaction, index) => (
                         <button
                           className='mr-2'
+                          key={index}
                           onClick={() => handleAddReaction(message, reaction)}
                         >
                           {reaction}
