@@ -86,12 +86,12 @@ export default function ChatDialog() {
     return <p className='text-white text-2xl'>Loading...</p>;
 
   return (
-    <div className='border rounded p-4 sm:w-full md:w-1/2 lg:w-1/3 text-white'>
+    <div className='flex flex-col border rounded p-4 w-full md:w-1/2 lg:w-1/3 text-white chat-height md:h-auto'>
       <ChatHeader
         channelName={channel.name}
         currentUserName={chat.currentUser.name}
       />
-      <section className='h-[250px] overflow-auto' ref={messageListRef}>
+      <section className='grow sm:h-[250px] overflow-auto' ref={messageListRef}>
         <ChatMessages
           messages={messages}
           users={users}
@@ -101,15 +101,17 @@ export default function ChatDialog() {
         />
       </section>
 
-      <ChatForm
-        text={text}
-        editMessage={editMessage}
-        editText={editText}
-        setText={setText}
-        setEditText={setEditText}
-        handleSend={handleSend}
-        handleSaveEdit={handleSaveEdit}
-      />
+      <footer className='mt-0'>
+        <ChatForm
+          text={text}
+          editMessage={editMessage}
+          editText={editText}
+          setText={setText}
+          setEditText={setEditText}
+          handleSend={handleSend}
+          handleSaveEdit={handleSaveEdit}
+        />
+      </footer>
     </div>
   );
 }
