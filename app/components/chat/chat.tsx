@@ -44,7 +44,7 @@ export default function ChatDialog() {
 
   useEffect(() => {
     async function initalizeChat() {
-      const id = searchParams.get('id');
+      const id = searchParams.get('id') || 0;
 
       const chat = await Chat.init({
         publishKey: process.env.NEXT_PUBLIC_PUBNUB_PUBLISH_KEY,
