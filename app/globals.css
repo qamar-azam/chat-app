@@ -31,3 +31,9 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .chat-height {
+    height: calc(100vh - 4rem);
+  }
+}
