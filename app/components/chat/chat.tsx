@@ -44,21 +44,25 @@ export default function ChatDialog() {
 
   useEffect(() => {
     async function initalizeChat() {
-      const id = searchParams.get('id') || 0;
+      const id = Number(searchParams.get('id')) || 0;
+
+      const firstUser = userData[id];
+      const secondUser = id === 0 ? userData[1] : userData[0];
 
       const chat = await Chat.init({
         publishKey: process.env.NEXT_PUBLIC_PUBNUB_PUBLISH_KEY,
         subscribeKey: process.env.NEXT_PUBLIC_PUBNUB_SUBSCRIBE_KEY,
-        userId: userData[id || 0].id
+        userId: firstUser.id
       });
-      const currentUser = await chat.currentUser.update(userData[0].data);
+      const currentUser = await chat.currentUser.update(firstUser.data);
       const interlocutor =
-        (await chat.getUser(userData[id].id)) ||
-        (await chat.createUser(userData[id].id, userData[id].data));
+        (await chat.getUser(secondUser.id)) ||
+        (await chat.createUser(secondUser.id, secondUser.data));
       const { channel } = await chat.createDirectConversation({
         user: interlocutor,
         channelData: { name: 'Support Channel' }
       });
+
       setChat(chat);
       setUsers([currentUser, interlocutor]);
       setChannel(channel);
