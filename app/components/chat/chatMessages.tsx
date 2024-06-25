@@ -43,7 +43,7 @@ export default function ChatMessages({
   const renderMessagePart = useCallback(
     (messagePart: MixedTextTypedElement) => {
       if (messagePart.type === 'text') {
-        return formatMessage(messagePart.content.text);
+        return formatMessage(messagePart.text);
       }
       if (messagePart.type === 'plainLink') {
         return (
@@ -90,41 +90,39 @@ export default function ChatMessages({
                 </time>
               </h3>
 
-              {message
-                .getLinkedText()
-                .map((messagePart: MixedTextTypedElement, i: number) => (
-                  <div key={message.timetoken} className='relative group'>
-                    {renderMessagePart(messagePart)}
+              <div className='relative group'>
+                {renderMessagePart(message.content)}
 
-                    <MessageReactions
-                      message={message}
-                      right={currentUser.name === user.name}
-                    />
+                <MessageReactions
+                  message={message}
+                  right={currentUser.name === user.name}
+                />
 
-                    <div
-                      className={`absolute invisible group-hover:visible rounded-full bg-slate-400 px-3  ${
-                        currentUser.name === user.name ? 'right-0' : 'left-0'
-                      }`}
+                <div
+                  className={`absolute invisible group-hover:visible rounded-full bg-slate-400 px-3  ${
+                    currentUser.name === user.name ? 'right-0' : 'left-0'
+                  }`}
+                >
+                  {reactionTypes.map((reaction, index) => (
+                    <button
+                      className='mr-2'
+                      key={index}
+                      onClick={() => handleAddReaction(message, reaction)}
                     >
-                      {reactionTypes.map((reaction, index) => (
-                        <button
-                          className='mr-2'
-                          key={index}
-                          onClick={() => handleAddReaction(message, reaction)}
-                        >
-                          {reaction}
-                        </button>
-                      ))}
+                      {reaction}
+                    </button>
+                  ))}
 
-                      <button
-                        onClick={() => handleEditMessage(message)}
-                        className='text-[10px] -mt-2'
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  {currentUser.name === user.name && (
+                    <button
+                      onClick={() => handleEditMessage(message)}
+                      className='text-[10px] -mt-2'
+                    >
+                      Edit
+                    </button>
+                  )}
+                </div>
+              </div>
             </article>
           </li>
         );
