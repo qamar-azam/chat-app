@@ -43,7 +43,7 @@ export default function ChatMessages({
   const renderMessagePart = useCallback(
     (messagePart: MixedTextTypedElement) => {
       if (messagePart.type === 'text') {
-        return formatMessage(messagePart.text);
+        return formatMessage(messagePart.content.text);
       }
       if (messagePart.type === 'plainLink') {
         return (
@@ -91,7 +91,7 @@ export default function ChatMessages({
               </h3>
 
               <div className='relative group'>
-                {renderMessagePart(message.content)}
+                {renderMessagePart(message.getLinkedText()[0])}
 
                 <MessageReactions
                   message={message}

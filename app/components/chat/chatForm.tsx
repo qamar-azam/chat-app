@@ -50,12 +50,17 @@ export default function ChatForm({
         }
         onKeyDown={(e) => {
           if (e.key == 'Enter' && e.shiftKey == false) {
-            handleSend(e);
+            if (editMessage) {
+              handleSaveEdit();
+            } else {
+              handleSend(e);
+            }
           }
         }}
         placeholder='Send message'
         className='h-10 outline-0 p-3 mr-2 w-full rounded text-sm text-black'
       />
+
       <input
         type='submit'
         value='➔'
